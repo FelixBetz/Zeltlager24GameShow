@@ -1,0 +1,42 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Database files
+*.db
+
+# Static files
+/static/
+
+# Configuration files
+instance/
+
+# Environment variables file
+.env
+
+# Compiled source files
+*.mo
+*.pot
+
+# Editor/IDE files
+.idea/
+.vscode/
+
+# Bytecode directories
+__pycache__/
+
+# Local development files
+*.env
+
+# Flask development files
+.pytest_cache/
+.env
+
+# Logs and backups
+*.log
+*.bak
+
+#ignore outfile
+/out
+.coverage
