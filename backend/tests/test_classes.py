@@ -8,7 +8,7 @@ class TestClasses(unittest.TestCase):
     """test dummy"""
 
     def setUp(self):
-        """setup classes"""
+        """set_up classes"""
         self.team1 = Team()
         self.team1.name = "Team A"
         self.team1.name_shortcut = "TA"

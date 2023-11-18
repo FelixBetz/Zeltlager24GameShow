@@ -4,7 +4,7 @@ echo:
 echo: 
 echo --------------------pylint--------------------
 
-python -m   pylint --recursive=y --ignore=*.pyc,*.docx,frontend_build/ app.py src/ tests/
+python -m   pylint --recursive=y app.py src/ tests/ --ignore=*.pyc,*.docx,frontend_build/ 
 
 
 python -m coverage report --omit=tests\*.py -m > tests/coverage_report.txt

@@ -8,9 +8,6 @@ frontend = Blueprint(
 )
 
 
-frontend
-
-
 @frontend.route("/")
 def root():
     """returns index.html from svelte frontend"""
@@ -29,6 +26,9 @@ def get_assset(arg_dir, arg_name):
     """returns svelte frontend"""
     image_path = f"static/assets/{arg_dir}/{arg_name}"
     content_type = "image/jpeg"
+
+    image_path = os.path.abspath(image_path)
+
     return send_file(image_path, mimetype=content_type)
 
 

@@ -8,9 +8,9 @@ from flask_cors import CORS
 from src.models.game import GameState
 from src.create_teams import create_teams
 from src.frontend import frontend
-from src.data import current_game
+from src.data import current_game, list_game_data, dummy_data
 from src.models.game import Team
-from src.games.list_game import list_game, start_game_1
+from src.games.list_game.list_game import list_game
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -41,7 +41,7 @@ def api_admin_switch_state():
 
         # entry state actions
         if new_state == GameState.GAME_1:
-            start_game_1()
+            list_game_data.start_game(dummy_data)
 
         current_game.change_game_state(new_state)
 
