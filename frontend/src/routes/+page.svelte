@@ -1,7 +1,6 @@
 <script lang="ts">
 	import CreateTeams from '$lib/CreateTeams/CreateTeams.svelte';
 	import ListGame from '$lib/Games/ListGame/ListGame.svelte';
-	import OverallScore from '$lib/OverallScore.svelte';
 	import { apiGetGame } from '$lib/api/apiGame';
 	import { GameState, type Game } from '$lib/types';
 	import { onDestroy, onMount } from 'svelte';

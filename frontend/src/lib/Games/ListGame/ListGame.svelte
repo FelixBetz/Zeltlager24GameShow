@@ -36,7 +36,7 @@
 <div class="row">
 	<div class="col-5 justify-content-center">
 		<ListGameList
-			items={gameData.placedItems}
+			items={gameData.itemsSorted}
 			minValue={gameData.minValue}
 			maxValue={gameData.maxValue}
 		/>
