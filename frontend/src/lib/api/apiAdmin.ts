@@ -48,3 +48,14 @@ export function apiUpdateCurrentTeam(pTeam: Team): Promise<boolean> {
 
 	return response;
 }
+
+export function apiDeleteTeam(pTeamIdx: number): Promise<boolean> {
+	const response = fetch(API_URL + 'deleteTeam?idx=' + pTeamIdx)
+		.then(() => true)
+		.catch((error) => {
+			console.log(error);
+			return false;
+		});
+
+	return response;
+}

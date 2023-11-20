@@ -1,10 +1,23 @@
 <script lang="ts">
 	import AvatarImage from '$lib/AvatarImage.svelte';
 	import { apiAddTeam, apiUpdateCurrentTeam } from '$lib/api/apiAdmin';
-	import { apiGetAvatars } from '$lib/api/apiGame';
+	import { apiGetAvatars, apiGetCurrentTeam } from '$lib/api/apiGame';
 
-	import type { Team } from '$lib/types';
-	import { onMount } from 'svelte';
+	import type { CurrentTeam, Team } from '$lib/types';
+	import { onDestroy, onMount } from 'svelte';
+	import TeamInfo from './TeamInfo.svelte';
+
+	let currentTeam: CurrentTeam = {
+		team: {
+			avatar_url: '',
+			name: '',
+			shortcut: '',
+			scores: [],
+			total_score: 0,
+			game_life: 0
+		},
+		isShow: false
+	};
 
 	let avatars: string[] = [];
 	let selectedAvatarIdx = -1;
@@ -32,17 +45,23 @@
 		}
 	}
 	function onTeamChange(pTeam: Team) {
-		console.log(pTeam);
-
 		apiUpdateCurrentTeam(pTeam);
 	}
 
 	$: updateUrl(selectedAvatarIdx);
 	$: onTeamChange(team);
-
+	async function cyclicInterval() {
+		currentTeam = await apiGetCurrentTeam();
+	}
+	let intervalGameState: string | number | NodeJS.Timeout | undefined;
 	onMount(async () => {
 		createNewTeam();
-		avatars = await apiGetAvatars();
+
+		avatars = [''].concat(await apiGetAvatars());
+		intervalGameState = setInterval(cyclicInterval, 100);
+	});
+	onDestroy(() => {
+		clearInterval(intervalGameState);
 	});
 </script>
 
@@ -87,7 +106,14 @@
 			</div>
 		</form>
 	</div>
-	<div class="col-6">asfd</div>
+
+	<div class="col-6">
+		{#if currentTeam.isShow}
+			<div>
+				<TeamInfo team={currentTeam.team} size={250} />
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style>

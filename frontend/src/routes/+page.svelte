@@ -2,14 +2,11 @@
 	import CreateTeams from '$lib/CreateTeams/CreateTeams.svelte';
 	import ListGame from '$lib/Games/ListGame/ListGame.svelte';
 	import { apiGetGame } from '$lib/api/apiGame';
-	import { GameState, type Game } from '$lib/types';
+	import { GameState, type Game, getDefaultGame } from '$lib/types';
 	import { onDestroy, onMount } from 'svelte';
 
 	let intervalGameState: string | number | NodeJS.Timeout | undefined;
-	let game: Game = {
-		teams: [],
-		state: GameState.IDLE
-	};
+	let game: Game = getDefaultGame();
 
 	let isRequestOngoing = false;
 	async function cyclicInterval() {
@@ -35,8 +32,6 @@
 	</div>
 	-->
 
-	<h3>{game.state}</h3>
-
 	<div>
 		{#if game.state == GameState.IDLE}
 			IDLE
@@ -52,7 +47,7 @@
 			IDLE
 		{:else if game.state == GameState.GAME_5}
 			IDLE
-		{:else if game.state == GameState.RESULTS}
+		{:else if game.state == GameState.SCORE}
 			IDLE
 		{/if}
 	</div>

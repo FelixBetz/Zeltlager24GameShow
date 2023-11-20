@@ -1,5 +1,12 @@
 import { API_URL } from './apiUrl';
 
+export enum ListGameState {
+	IDLE = 'IDLE',
+	WAIT_DRAW = 'WAIT_DRAW',
+	PLAY = 'PLAY',
+	SHOW_POINTS = 'SHOW_POINTS'
+}
+
 export interface ListGameItem {
 	label: string;
 	value: number;
@@ -15,6 +22,7 @@ export interface ListGameData {
 	minValue: string;
 	maxValue: string;
 	question: string;
+	state: ListGameState;
 }
 
 export function getDefaultListGameDate(): ListGameData {
@@ -24,11 +32,12 @@ export function getDefaultListGameDate(): ListGameData {
 		itemsRandom: [],
 		minValue: '',
 		maxValue: '',
-		question: ''
+		question: '',
+		state: ListGameState.IDLE
 	};
 }
 
-export function apiGetListGameData(): Promise<ListGameData> {
+export function apiListGameGetData(): Promise<ListGameData> {
 	const response = fetch(API_URL + 'list_game/data')
 		.then((response) => response.json())
 		.then((response: ListGameData) => response)
@@ -37,7 +46,7 @@ export function apiGetListGameData(): Promise<ListGameData> {
 	return response;
 }
 
-export function apiPlaceItem(pIndex: number, pPositon: number): Promise<boolean> {
+export function apiListGamePlaceItem(pIndex: number, pPositon: number): Promise<boolean> {
 	const formData = new FormData();
 	formData.append('index', pIndex.toString());
 	formData.append('position', pPositon.toString());
@@ -46,6 +55,27 @@ export function apiPlaceItem(pIndex: number, pPositon: number): Promise<boolean>
 		method: 'POST',
 		body: formData
 	})
+		.then(() => true)
+		.catch((error) => {
+			console.log(error);
+			return false;
+		});
+
+	return response;
+}
+
+export function apiListGameSwitchState(pState: string): Promise<boolean> {
+	const response = fetch(API_URL + 'list_game/switchState?state=' + pState)
+		.then(() => true)
+		.catch((error) => {
+			console.log(error);
+			return false;
+		});
+
+	return response;
+}
+export function apiListGameSwitchCurrentTeam(pTeam: number): Promise<boolean> {
+	const response = fetch(API_URL + 'admin/switchCurrentTurn?team=' + pTeam)
 		.then(() => true)
 		.catch((error) => {
 			console.log(error);

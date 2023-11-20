@@ -1,5 +1,5 @@
 import { API_URL } from './apiUrl';
-import { GameState, type Game, type Team } from '../types';
+import { type Game, getDefaultGame, type CurrentTeam } from '../types';
 
 export function apiGetGame(): Promise<Game> {
 	const response = fetch(API_URL + 'game')
@@ -7,7 +7,7 @@ export function apiGetGame(): Promise<Game> {
 		.then((response: Game) => response)
 		.catch((error) => {
 			console.log(error);
-			return { teams: [], state: GameState.IDLE };
+			return getDefaultGame();
 		});
 
 	return response;
@@ -24,7 +24,7 @@ export function apiGetAvatars(): Promise<string[]> {
 	return response;
 }
 
-export function apiGetCurrentTeam(): Promise<Team> {
+export function apiGetCurrentTeam(): Promise<CurrentTeam> {
 	const response = fetch(API_URL + 'get_current_team')
 		.then((response) => response.json())
 		.catch((error) => {

@@ -1,7 +1,11 @@
 """unit test models schema"""
 import unittest
 
-from src.games.list_game.list_game_model import ListGameItem, ListGameData
+from src.games.list_game.list_game_model import (
+    ListGameItem,
+    ListGameData,
+    ListGameState,
+)
 
 TEST_GAME_DATA = [
     {"label": "test1", "value": -1},
@@ -116,3 +120,11 @@ class TestListGame(unittest.TestCase):
         self.assertEqual(idx_placed, [0, 1, 2, 3])
         idx_unplaced = [item.index for item in my_game_data.data if not item.is_placed]
         self.assertEqual(idx_unplaced, [])
+
+    def test_switch_state(self):
+        """test switcht state"""
+
+        my_game_data = ListGameData()
+        self.assertEqual(my_game_data.state, ListGameState.IDLE)
+        my_game_data.switch_state(ListGameState.WAIT_DRAW)
+        self.assertEqual(my_game_data.state, ListGameState.WAIT_DRAW)

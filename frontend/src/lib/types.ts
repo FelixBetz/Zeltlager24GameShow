@@ -6,7 +6,7 @@ export enum GameState {
 	GAME_3 = 'GAME_3',
 	GAME_4 = 'GAME_4',
 	GAME_5 = 'GAME_5',
-	RESULTS = 'RESULTS'
+	SCORE = 'SCORE'
 }
 
 export interface Team {
@@ -18,7 +18,17 @@ export interface Team {
 	game_life: number;
 }
 
+export interface CurrentTeam {
+	team: Team;
+	isShow: boolean;
+}
+
 export interface Game {
 	teams: Team[];
 	state: GameState;
+	currentTurnTeam: number;
+}
+
+export function getDefaultGame(): Game {
+	return { teams: [], state: GameState.IDLE, currentTurnTeam: -1 };
 }

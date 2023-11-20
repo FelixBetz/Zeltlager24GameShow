@@ -9,8 +9,8 @@ class ListGameState(Enum):
 
     IDLE = "IDLE"
     WAIT_DRAW = "WAIT_DRAW"
-    GAME_1 = "PLAY"
-    GAME_2 = "SHOW_POINTS"
+    PLAY = "PLAY"
+    SHOW_POINTS = "SHOW_POINTS"
 
 
 class ListGameData:
@@ -18,6 +18,11 @@ class ListGameData:
 
     def __init__(self):
         self.data = []
+        self.state = ListGameState.IDLE
+
+    def switch_state(self, arg_state):
+        """change state"""
+        self.state = arg_state
 
     def start_game(self, arg_data):
         """start game"""
@@ -94,6 +99,7 @@ class ListGameData:
         ]
 
         return {
+            "state": self.state.name,
             "itemsSorted": game_data_json,
             "placedItems": placed_item_json,
             "itemsRandom": random_sorted_json,

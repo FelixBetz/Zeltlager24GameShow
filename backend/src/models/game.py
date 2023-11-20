@@ -13,7 +13,7 @@ class GameState(Enum):
     GAME_3 = "GAME_3"
     GAME_4 = "GAME_4"
     GAME_5 = "GAME_5"
-    RESULTS = "RESULTS"
+    SCORE = "SCORE"
 
 
 class Team:
@@ -48,6 +48,9 @@ class Team:
         self.avatar_url = ""
         self.scores = []
 
+    def add_score(self):
+        """add score"""
+
 
 class Game:
     """represents a game"""
@@ -55,6 +58,7 @@ class Game:
     def __init__(self):
         self.teams = []
         self.game_state = GameState.IDLE
+        self.current_turn_team = -1
 
     def change_game_state(self, new_state):
         """change game state"""
@@ -69,4 +73,5 @@ class Game:
         return {
             "state": self.game_state.name,
             "teams": [team.to_json() for team in self.teams],
+            "currentTurnTeam": self.current_turn_team,
         }
