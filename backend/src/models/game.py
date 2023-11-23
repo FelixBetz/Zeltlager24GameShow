@@ -48,8 +48,9 @@ class Team:
         self.avatar_url = ""
         self.scores = []
 
-    def add_score(self):
+    def add_score(self, arg_score):
         """add score"""
+        self.scores.append(arg_score)
 
 
 class Game:

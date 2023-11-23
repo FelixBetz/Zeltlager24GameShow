@@ -3,6 +3,7 @@ filename: app.py
 contains all flask routes
 """
 import logging
+import random
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from src.games.list_game.list_game_model import ListGameState
@@ -64,15 +65,22 @@ def test_setup():
     """setup test enviorement"""
 
     team1 = Team("Team1", "T1", "avatars/owl.png")
-    current_game.add_team(team1)
-
     team2 = Team("Team2", "T2", "avatars/bird.png")
-    current_game.add_team(team2)
+    team3 = Team("Team3", "T3", "avatars/lion.png")
 
-    team2 = Team("Team3", "T3", "avatars/lion.png")
-    current_game.add_team(team2)
+    my_array = [1, 2, 3]
+    for _ in range(5):
+        # Shuffle the array randomly
+        random.shuffle(my_array)
+        team1.add_score(my_array[0])
+        team2.add_score(my_array[1])
+        team3.add_score(my_array[2])
 
-    current_game.change_game_state(GameState.CREATING_TEAMS)
+    current_game.add_team(team1)
+    current_game.add_team(team2)
+    current_game.add_team(team3)
+
+    current_game.change_game_state(GameState.IDLE)
 
 
 if __name__ == "__main__":

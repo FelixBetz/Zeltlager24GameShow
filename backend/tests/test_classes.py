@@ -23,10 +23,15 @@ class TestClasses(unittest.TestCase):
 
         self.game = Game()
 
-    def test_team_get_score(self):
+    def test_team__score(self):
         """test team score"""
         self.assertEqual(self.team1.get_score(), 45)
         self.assertEqual(self.team2.get_score(), 60)
+
+        # add score
+        self.team1.add_score(5)
+        self.assertEqual(self.team1.scores, [10, 15, 20, 5])
+        self.assertEqual(self.team1.get_score(), 50)
 
     def test_team_to_json(self):
         """test json conversion"""

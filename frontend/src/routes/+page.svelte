@@ -1,6 +1,7 @@
 <script lang="ts">
 	import CreateTeams from '$lib/CreateTeams/CreateTeams.svelte';
 	import ListGame from '$lib/Games/ListGame/ListGame.svelte';
+	import Score from '$lib/Score/Score.svelte';
 	import { apiGetGame } from '$lib/api/apiGame';
 	import { GameState, type Game, getDefaultGame } from '$lib/types';
 	import { onDestroy, onMount } from 'svelte';
@@ -48,7 +49,7 @@
 		{:else if game.state == GameState.GAME_5}
 			IDLE
 		{:else if game.state == GameState.SCORE}
-			IDLE
+			<Score teams={game.teams} />
 		{/if}
 	</div>
 </div>
