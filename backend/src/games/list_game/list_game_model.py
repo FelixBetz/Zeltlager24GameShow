@@ -10,7 +10,6 @@ class ListGameState(Enum):
     IDLE = "IDLE"
     WAIT_DRAW = "WAIT_DRAW"
     PLAY = "PLAY"
-    SHOW_POINTS = "SHOW_POINTS"
 
 
 class ListGameData:
@@ -119,6 +118,7 @@ class ListGameItem:
         self.random_index = -1
         self.is_placed = False
         self.is_start_item = False
+        self.is_show_value = False
 
     def to_json(self):
         """convert to json"""
@@ -128,6 +128,7 @@ class ListGameItem:
             "index": self.index,
             "isPlaced": self.is_placed,
             "isStartItem": self.is_start_item,
+            "isShowValue": self.is_show_value,
         }
 
     def __repr__(self):

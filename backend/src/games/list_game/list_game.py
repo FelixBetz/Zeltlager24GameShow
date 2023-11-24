@@ -10,6 +10,16 @@ list_game = Blueprint(
 )
 
 
+@list_game.route("/api/list_game/showValues")
+def show_all_item_values():
+    """get list game data"""
+    is_show_values = int(request.args.get("showValues", 0))
+    is_show_values = is_show_values == 1
+    for item in list_game_data.data:
+        item.is_show_value = is_show_values
+    return jsonify(is_show_values)
+
+
 @list_game.route("/api/list_game/data")
 def get_list_game_data():
     """get list game data"""

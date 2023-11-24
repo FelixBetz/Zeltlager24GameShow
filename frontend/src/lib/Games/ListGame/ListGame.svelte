@@ -10,6 +10,7 @@
 	import ListGameList from './ListGameList.svelte';
 	import ListGameItems from './ListGameItems.svelte';
 	import AvatarImage from '$lib/AvatarImage.svelte';
+	import GameTitle from '$lib/GameTitle.svelte';
 
 	export let game: Game;
 
@@ -35,7 +36,8 @@
 	});
 </script>
 
-<h1>{GAME_NAME}</h1>
+<GameTitle title={GAME_NAME} />
+
 {#if gameData.state == ListGameState.IDLE}
 	<div>IDle</div>
 {:else if gameData.state == ListGameState.WAIT_DRAW}
@@ -62,8 +64,6 @@
 			<ListGameItems items={gameData.itemsRandom} />
 		</div>
 	</div>
-{:else if gameData.state == ListGameState.SHOW_POINTS}
-	Points
 {/if}
 
 <style>

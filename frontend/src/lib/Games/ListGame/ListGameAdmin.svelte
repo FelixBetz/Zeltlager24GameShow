@@ -5,7 +5,8 @@
 		getDefaultListGameDate,
 		ListGameState,
 		type ListGameData,
-		apiListGameSwitchState
+		apiListGameSwitchState,
+		apiListGameShowValues
 	} from '$lib/api/apiGameListGame';
 	import { onDestroy, onMount } from 'svelte';
 	import ListGameItems from './ListGameItems.svelte';
@@ -84,6 +85,16 @@
 			</button>
 		</div>
 	{/each}
+	<div class="col-2">
+		<button class="btn btn-info w-100" on:click={() => apiListGameShowValues(true)}>
+			Show Values
+		</button>
+	</div>
+	<div class="col-2">
+		<button class="btn btn-info w-100" on:click={() => apiListGameShowValues(false)}>
+			Hide Values
+		</button>
+	</div>
 </div>
 <hr />
 
@@ -102,7 +113,7 @@
 						aria-label="Default select example"
 						bind:value={selectedItemIndex}
 					>
-						{#each gameData.itemsRandom as item}
+						{#each gameData.itemsSorted as item}
 							{#if !item.isPlaced}
 								<option value={item.index}>{item.label}</option>
 							{/if}
@@ -132,6 +143,4 @@
 	<div class="mt-5">
 		<ListGameItems items={gameData.itemsSorted} showDetails={true} />
 	</div>
-{:else if gameData.state == ListGameState.SHOW_POINTS}
-	Points
 {/if}

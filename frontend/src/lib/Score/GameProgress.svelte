@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { API_URL } from '$lib/api/apiUrl';
 	import type { Game } from '$lib/types';
-	import Crown from './Crown.svelte';
+	import Crown from '../Icons/Crown.svelte';
 
 	export let game: Game;
 	export let colors: string[];

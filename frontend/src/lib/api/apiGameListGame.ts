@@ -3,8 +3,7 @@ import { API_URL } from './apiUrl';
 export enum ListGameState {
 	IDLE = 'IDLE',
 	WAIT_DRAW = 'WAIT_DRAW',
-	PLAY = 'PLAY',
-	SHOW_POINTS = 'SHOW_POINTS'
+	PLAY = 'PLAY'
 }
 
 export interface ListGameItem {
@@ -13,6 +12,7 @@ export interface ListGameItem {
 	index: number;
 	isPlaced: boolean;
 	isStartItem: boolean;
+	isShowValue: boolean;
 }
 
 export interface ListGameData {
@@ -76,6 +76,17 @@ export function apiListGameSwitchState(pState: string): Promise<boolean> {
 }
 export function apiListGameSwitchCurrentTeam(pTeam: number): Promise<boolean> {
 	const response = fetch(API_URL + 'admin/switchCurrentTurn?team=' + pTeam)
+		.then(() => true)
+		.catch((error) => {
+			console.log(error);
+			return false;
+		});
+
+	return response;
+}
+
+export function apiListGameShowValues(pIsShowValues: boolean): Promise<boolean> {
+	const response = fetch(API_URL + 'list_game/showValues?showValues=' + (pIsShowValues ? '1' : '0'))
 		.then(() => true)
 		.catch((error) => {
 			console.log(error);

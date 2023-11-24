@@ -38,9 +38,15 @@
 						</span>
 					{/if}
 					<div style="margin-left:  20px;">
-						<div class:start-item={item.isStartItem} class="fly-in rounded-3 p-2 bg-info">
+						<div
+							class:start-item={item.isStartItem}
+							class="fly-in rounded-3 p-2 fw-bolder fs-5 {item.isStartItem
+								? 'bg-secondary'
+								: 'bg-info'}"
+						>
 							{item.label}
-							{#if item.isStartItem} ({item.value}){/if}
+
+							{#if item.isStartItem || item.isShowValue} ({item.value}){/if}
 						</div>
 					</div>
 
@@ -58,10 +64,6 @@
 </div>
 
 <style>
-	.start-item {
-		font-weight: bolder;
-	}
-
 	.index {
 		display: inline-block;
 		padding: 4px 15px;

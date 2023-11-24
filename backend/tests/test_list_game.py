@@ -36,6 +36,7 @@ class TestListGame(unittest.TestCase):
                 "index": -1,
                 "isPlaced": False,
                 "isStartItem": False,
+                "isShowValue": False,
             },
         )
 

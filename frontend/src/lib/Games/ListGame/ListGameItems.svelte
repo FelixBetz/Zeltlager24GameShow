@@ -6,7 +6,7 @@
 
 <div class="row g-3">
 	{#each items as item}
-		<div class="col-4">
+		<div class="col-4 fw-bolder fs-5">
 			<div
 				class="item rounded-3 p-2 text-center {item.isPlaced ? 'bg-body-tertiary' : 'bg-primary'}"
 			>
