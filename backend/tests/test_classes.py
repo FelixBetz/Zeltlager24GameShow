@@ -21,7 +21,12 @@ class TestClasses(unittest.TestCase):
         self.team2.avatar_url = "https://example.com/teamB_avatar"
         self.team2.scores = [5, 25, 30]
 
-        self.game = Game()
+        self.game = Game(5)
+
+    def test_inital_game_state(self):
+        """test inital game state"""
+        self.assertEqual(self.game.game_state, GameState.IDLE)
+        self.assertEqual(self.game.games_to_play, 5)
 
     def test_team__score(self):
         """test team score"""
@@ -66,6 +71,8 @@ class TestClasses(unittest.TestCase):
         game_json = self.game.to_json()
         self.assertEqual(game_json["state"], "GAME_1")
         self.assertEqual(len(game_json["teams"]), 2)
+        self.assertEqual(game_json["gamesPlayed"], 0)
+        self.assertEqual(game_json["gamesToPlay"], 5)
 
     def test_reset(self):
         """reset team data"""

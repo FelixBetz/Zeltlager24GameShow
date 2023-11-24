@@ -56,10 +56,12 @@ class Team:
 class Game:
     """represents a game"""
 
-    def __init__(self):
+    def __init__(self, arg_games_to_play):
         self.teams = []
         self.game_state = GameState.IDLE
         self.current_turn_team = -1
+        self.games_played = 0
+        self.games_to_play = arg_games_to_play
 
     def change_game_state(self, new_state):
         """change game state"""
@@ -75,4 +77,6 @@ class Game:
             "state": self.game_state.name,
             "teams": [team.to_json() for team in self.teams],
             "currentTurnTeam": self.current_turn_team,
+            "gamesToPlay": self.games_to_play,
+            "gamesPlayed": self.games_played,
         }

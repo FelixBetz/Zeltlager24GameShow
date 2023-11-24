@@ -49,7 +49,7 @@
 		{:else if game.state == GameState.GAME_5}
 			IDLE
 		{:else if game.state == GameState.SCORE}
-			<Score teams={game.teams} />
+			<Score {game} />
 		{/if}
 	</div>
 </div>

@@ -27,8 +27,10 @@ export interface Game {
 	teams: Team[];
 	state: GameState;
 	currentTurnTeam: number;
+	gamesToPlay: number;
+	gamesPlayed: number;
 }
 
 export function getDefaultGame(): Game {
-	return { teams: [], state: GameState.IDLE, currentTurnTeam: -1 };
+	return { teams: [], state: GameState.IDLE, currentTurnTeam: -1, gamesToPlay: 0, gamesPlayed: 0 };
 }

@@ -14,6 +14,7 @@ from src.data import current_game, list_game_data
 from src.models.game import Team
 from src.games.list_game.list_game import list_game
 
+
 app = Flask(__name__)
 cors = CORS(app)
 
@@ -64,9 +65,9 @@ def switch_current_team_turn():
 def test_setup():
     """setup test enviorement"""
 
-    team1 = Team("Team1", "T1", "avatars/owl.png")
-    team2 = Team("Team2", "T2", "avatars/bird.png")
-    team3 = Team("Team3", "T3", "avatars/lion.png")
+    team1 = Team("Gewinner", "T1", "avatars/owl.png")
+    team2 = Team("Trinity", "T2", "avatars/bird.png")
+    team3 = Team("Test", "T3", "avatars/lion.png")
 
     my_array = [1, 2, 3]
     for _ in range(5):
@@ -80,7 +81,8 @@ def test_setup():
     current_game.add_team(team2)
     current_game.add_team(team3)
 
-    current_game.change_game_state(GameState.IDLE)
+    current_game.change_game_state(GameState.SCORE)
+    current_game.games_played = 3
 
 
 if __name__ == "__main__":

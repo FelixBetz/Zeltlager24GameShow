@@ -6,10 +6,10 @@
 </script>
 
 <div
-	style="width: {size}px; height: {size}px"
-	class="avatar rounded mx-auto d-block border border-5 bg-secondary-subtle {isSelected
-		? ' border-primary'
-		: '	'} "
+	style="width: {size}px; height: {size}px; background-color: var(--bs-gray-600) "
+	class="avatar rounded mx-auto d-block border border-5 {isSelected
+		? 'border-info'
+		: 'border-normal'}"
 >
 	{#if avatar != ''}
 		<img src={API_URL + 'assets/' + avatar} alt={avatar} />
@@ -23,5 +23,9 @@
 	img {
 		width: 100%;
 		height: 100%;
+	}
+
+	.border-normal {
+		border-color: var(--bs-gray-600) !important;
 	}
 </style>

@@ -3,7 +3,10 @@
 from src.games.list_game.list_game_model import ListGameData
 from src.models.game import Game, Team
 
-current_game = Game()
+
+GAMES_TO_PLAY = 5
+
+current_game = Game(GAMES_TO_PLAY)
 current_team = Team()
 
 list_game_data = ListGameData()

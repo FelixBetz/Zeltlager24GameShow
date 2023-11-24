@@ -1,11 +1,13 @@
 <script lang="ts">
+	import GameProgress from '$lib/Score/GameProgress.svelte';
 	import AvatarImage from '$lib/AvatarImage.svelte';
 
-	import type { Team } from '$lib/types';
+	import type { Game, Team } from '$lib/types';
+
 	//https://www.learnui.design/tools/data-color-picker.html#single
 	const COLORS = ['#f3b84d', '#e49339', '#d36e2c', '#be4825', '#a61a21'];
 
-	const HEIGHT = 60;
+	const HEIGHT = 30;
 	const IMAGE_HEIGHT = 2 * HEIGHT;
 
 	interface BarValue {
@@ -17,10 +19,10 @@
 		values: BarValue[];
 	}
 
-	export let teams: Team[] = [];
+	export let game: Game;
 
 	let bars: ProgressBar[] = [];
-	$: generateProgressBars(teams);
+	$: generateProgressBars(game.teams);
 	function generateProgressBars(pTeams: Team[]) {
 		let MAX_SCORE = 0;
 
@@ -43,16 +45,28 @@
 	}
 </script>
 
-<div>
+<div class="mt-3">
+	<GameProgress {game} colors={COLORS} />
+</div>
+<div class="mt-3">
 	{#each bars as bar, barIdx}
-		<div class=" mt-5 mb-5" style="display:flex;">
-			<div class="" style="flex: 1;">
-				<div><h1>Team {teams[barIdx].name}: {teams[barIdx].total_score} Punkte</h1></div>
+		<div
+			class=" mt-1 mb-1 p-2 ps-4 rounded-2"
+			style="display:flex;  align-items: end; background-color: var(--bs-body-bg);"
+		>
+			<div class="" style="flex: 1; ">
+				<div>
+					<div class="title">
+						Team {game.teams[barIdx].name}: {game.teams[barIdx].total_score} Punkte
+					</div>
+				</div>
 				<div style="width: 100%; display:flex; ">
 					{#each bar.values as value, valueIdx}
 						<div
-							class=" border-dark border-3 point"
-							style="width: {value.value}%; background-color: {value.color}; padding:10px; height: {HEIGHT}px; "
+							class="border-3 point"
+							style="border-color: {value.color}; width: {value.value}%; background-color: {value.color}; padding:10px; height: {HEIGHT}px; --animation-order:{1 +
+								valueIdx}"
+							data-animation-offset={1 + valueIdx}
 							aria-valuenow={value.value}
 							aria-valuemin="0"
 							aria-valuemax="100"
@@ -61,17 +75,32 @@
 				</div>
 			</div>
 			<div class="ms-5">
-				<AvatarImage avatar={teams[barIdx].avatar_url} size={IMAGE_HEIGHT} />
+				<AvatarImage avatar={game.teams[barIdx].avatar_url} size={IMAGE_HEIGHT + 20} />
 			</div>
 		</div>
 	{/each}
 </div>
 
 <style>
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
 	.point {
-		border-right: 1px solid;
+		margin-right: 2px;
 		font-weight: bolder;
 		font-size: 1.3rem;
+		opacity: 0;
+
+		animation-name: fadeIn;
+		animation-duration: 200ms;
+		animation-delay: calc(1000ms +var(--animation-order) * 50ms);
+		animation-fill-mode: both;
+		animation-timing-function: ease-in-out forwards;
 	}
 
 	.point:first-child {
@@ -82,5 +111,11 @@
 	.point:last-child {
 		border-bottom-right-radius: var(--bs-border-radius-xl) !important;
 		border-top-right-radius: var(--bs-border-radius-xl) !important;
+	}
+
+	.title {
+		font-size: 2rem;
+		font-weight: 600;
+		color: var(--bs-gray-400);
 	}
 </style>
