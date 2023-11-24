@@ -35,49 +35,40 @@
 	});
 </script>
 
-<div class="mb-3">
-	<h1>Teams</h1>
-</div>
-<div class="team-row">
-	{#each game.teams as team}
-		<div>
-			<TeamInfo {team} size={250} />
-		</div>
-	{/each}
-</div>
-<div class="mt-3">
-	<h2>Neues Team</h2>
-</div>
-<div class="d-flex">
-	<div class="me-5">
-		{#if currentTeam.isShow}
-			<div>
-				<TeamInfo team={currentTeam.team} size={250} />
+<div class="row text-center mt-3">
+	<div class="d-flex flex-wrap justify-content-center">
+		{#each game.teams as team}
+			<div class="p-3">
+				<TeamInfo {team} size={250} />
 			</div>
-		{/if}
+		{/each}
 	</div>
-	<div class="">
-		<div class="avatar-row">
-			{#each avatars as avatar}
-				<div>
-					<AvatarImage size={100} {avatar} isSelected={avatar == currentTeam.team.avatar_url} />
-				</div>
-			{/each}
-		</div>
-	</div>
-</div>
+	{#if currentTeam.isShow}
+		<div class=" mt-5 mb-5">
+			<div class="text-start fs-1 p-0">Neues Team:</div>
+			<div class="border border-5 border-light p-0" style="border-style: dashed !important;">
+				<div class="row m-3">
+					<div class="col" style=" max-width: 300px;">
+						<div class="p-2">
+							<TeamInfo team={currentTeam.team} size={220} />
+						</div>
+					</div>
 
-<style>
-	.team-row {
-		display: flex;
-		flex-wrap: wrap;
-		column-gap: 10px;
-		row-gap: 10px;
-	}
-	.avatar-row {
-		display: flex;
-		flex-wrap: wrap;
-		column-gap: 10px;
-		row-gap: 10px;
-	}
-</style>
+					<div class="col">
+						<div class="d-flex justify-content-around flex-wrap p-0 m-0">
+							{#each avatars as avatar}
+								<div class="p-2 m-0">
+									<AvatarImage
+										size={100}
+										{avatar}
+										isSelected={avatar == currentTeam.team.avatar_url}
+									/>
+								</div>
+							{/each}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{/if}
+</div>
