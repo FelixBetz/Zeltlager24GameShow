@@ -81,7 +81,7 @@ def test_setup():
     current_game.add_team(team2)
     current_game.add_team(team3)
 
-    current_game.change_game_state(GameState.SCORE)
+    current_game.change_game_state(GameState.IDLE)
     current_game.games_played = 3
 
 

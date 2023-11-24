@@ -2,6 +2,7 @@
 	import CreateTeams from '$lib/CreateTeams/CreateTeams.svelte';
 	import ListGame from '$lib/Games/ListGame/ListGame.svelte';
 	import Score from '$lib/Score/Score.svelte';
+	import Startscreen from '$lib/Startscreen.svelte';
 	import { apiGetGame } from '$lib/api/apiGame';
 	import { GameState, type Game, getDefaultGame } from '$lib/types';
 	import { onDestroy, onMount } from 'svelte';
@@ -35,7 +36,7 @@
 
 	<div>
 		{#if game.state == GameState.IDLE}
-			IDLE
+			<Startscreen />
 		{:else if game.state === GameState.CREATING_TEAMS}
 			<CreateTeams {game} />
 		{:else if game.state === GameState.GAME_1}
