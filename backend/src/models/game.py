@@ -30,6 +30,18 @@ class Team:
         """returns total team score"""
         return sum(self.scores)
 
+    def decrement_life(self):
+        "decrease life"
+        if self.game_life > 0:
+            self.game_life -= 1
+            return True
+        return False
+
+    def increment_life(self):
+        "increase life"
+        self.game_life += 1
+        return True
+
     def to_json(self):
         """returns object as json"""
         return {

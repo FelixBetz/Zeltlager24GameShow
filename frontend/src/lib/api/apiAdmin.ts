@@ -59,3 +59,24 @@ export function apiDeleteTeam(pTeamIdx: number): Promise<boolean> {
 
 	return response;
 }
+
+export function apiIncrementTeamLife(pTeamIndex: number): Promise<boolean> {
+	const response = fetch(API_URL + 'admin/incrementLife?team=' + pTeamIndex.toString())
+		.then(() => true)
+		.catch((error) => {
+			console.log(error);
+			return false;
+		});
+
+	return response;
+}
+export function apiDecrementTeamLife(pTeamIndex: number): Promise<boolean> {
+	const response = fetch(API_URL + 'admin/decrementLife?team=' + pTeamIndex.toString())
+		.then(() => true)
+		.catch((error) => {
+			console.log(error);
+			return false;
+		});
+
+	return response;
+}

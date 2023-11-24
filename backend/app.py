@@ -62,6 +62,24 @@ def switch_current_team_turn():
     return jsonify(False)
 
 
+@app.route("/api/admin/decrementLife")
+def increase_team_life():
+    """switch current team turn"""
+    team_idx = int(request.args.get("team", -1))
+    if 0 <= team_idx < len(current_game.teams):
+        return jsonify(current_game.teams[team_idx].decrement_life())
+    return jsonify(False)
+
+
+@app.route("/api/admin/incrementLife")
+def decrease_team_life():
+    """switch current team turn"""
+    team_idx = int(request.args.get("team", -1))
+    if 0 <= team_idx < len(current_game.teams):
+        return jsonify(current_game.teams[team_idx].increment_life())
+    return jsonify(False)
+
+
 def test_setup():
     """setup test enviorement"""
 

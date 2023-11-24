@@ -38,6 +38,22 @@ class TestClasses(unittest.TestCase):
         self.assertEqual(self.team1.scores, [10, 15, 20, 5])
         self.assertEqual(self.team1.get_score(), 50)
 
+    def test_team_life(self):
+        """test team life"""
+        self.assertEqual(self.team1.game_life, 3)
+        self.team1.increment_life()
+        self.assertEqual(self.team1.game_life, 4)
+        self.team1.decrement_life()
+        self.assertEqual(self.team1.game_life, 3)
+        self.team1.decrement_life()
+        self.assertEqual(self.team1.game_life, 2)
+        self.team1.decrement_life()
+        self.assertEqual(self.team1.game_life, 1)
+        self.team1.decrement_life()
+        self.assertEqual(self.team1.game_life, 0)
+        self.team1.decrement_life()
+        self.assertEqual(self.team1.game_life, 0)
+
     def test_team_to_json(self):
         """test json conversion"""
         team_json = self.team1.to_json()
